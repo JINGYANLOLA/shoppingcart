@@ -57,7 +57,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <div>
-          <h1 textAlign="center">Catalog</h1>
+          <h1 textAlign="center">Wierd T-shirt</h1>
         </div>
 
         <Catalogs
