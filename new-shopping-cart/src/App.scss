@@ -1,0 +1,16 @@
+.App{
+display:flex;
+}
+.Login{
+  display: flex;
+  flex-direction: column;
+}
+.PopCart{
+  align-self: right;
+  margin: 0 auto;
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+}
