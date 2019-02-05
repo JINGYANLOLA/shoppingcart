@@ -3,6 +3,7 @@ import Catalogs from "./Catalogs.js";
 import "./App.scss";
 import firebase from "firebase";
 import { Typography } from "@material-ui/core";
+import Cart from "./Cart";
 
 class App extends Component {
   state = {
@@ -27,7 +28,7 @@ class App extends Component {
     });
   }
   handleIncrement = product => {
-    const products = [...this.state.products];
+    const products = [...this.state.products]; //... copy products
     const cartProducts = [...this.state.cartProducts];
     if (cartProducts.some(p => p.id === product.id)) {
       product["quantity"] += 1;
@@ -37,23 +38,16 @@ class App extends Component {
     }
     this.setState({ cartProducts, products });
   };
-
-  getPagedData = () => {
-    const { selectedSizes, products: allproducts } = this.state;
-
-    const filtered =
-      selectedSizes.length > 0
-        ? allproducts.filter(p =>
-            p.availableSizes.some((s, i) =>
-              selectedSizes.some((c, j) => c.value === s)
-            )
-          )
-        : allproducts;
-    return { totalCount: filtered.length, data: filtered };
+  handleDelete = product => {
+    const products = [...this.state.products];
+    const cartProducts = this.state.cartProducts.filter(
+      p => p.id !== product.id
+    );
+    product["quantity"] = 0;
+    this.setState({ cartProducts, products });
   };
 
   render() {
-    const { totalCount, data: products } = this.getPagedData();
     return (
       <React.Fragment>
         <div>
@@ -61,9 +55,14 @@ class App extends Component {
         </div>
 
         <Catalogs
-          products={products}
+          products={this.state.products}
           cartProducts={this.state.cartProducts}
           onIncrement={this.handleIncrement}
+        />
+        <Cart
+          products={this.state.products}
+          cartProducts={this.state.cartProducts}
+          onDelete={this.state.handleDelete}
         />
       </React.Fragment>
     );

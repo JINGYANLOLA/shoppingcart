@@ -1,6 +1,6 @@
 {
   "database": {
-    "rules": "firebase use --add shopping-cart-a1306"
+    "rules": "database.rules.json"
   },
   "hosting": {
     "public": "public",
