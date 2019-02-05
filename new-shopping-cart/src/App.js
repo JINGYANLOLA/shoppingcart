@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Catalogs from "./Catalogs.js";
 import "./App.scss";
-import firebase from "firebase";
+
 import { Typography } from "@material-ui/core";
 import Cart from "./Cart";
 
